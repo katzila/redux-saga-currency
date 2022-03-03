@@ -1,4 +1,20 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }
 
+.nav-container {
+  display: flex;
+  justify-content: center;
+  top: 0;
+  margin: 10px;
+  width: 100%;
+
+  margin: 0px;
+  background-color: rgb(0, 21, 41);
+}

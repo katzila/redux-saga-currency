@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react'
-import { Button } from 'antd';
+import { Button, Layout, Space } from 'antd';
 
 import { getCurrency } from './app/reducers/currency';
-
+import Navbar from './components/Navbar';
 import './App.css';
 
 function App() {
@@ -20,8 +20,11 @@ function App() {
 
   return (
     <div className="App">
-      <h1>{`USD to RUB : ${rate}`}</h1>
-      <Button type='primary' onClick={handleCurrency}>Get new currency rate</Button>
+      <Navbar />
+      <Layout>
+        <h1>{`USD to RUB : ${rate}`}</h1>
+        <Button type='primary' onClick={handleCurrency}>Get new currency rate</Button>
+      </Layout>
     </div>
   );
 }
