@@ -1,19 +1,20 @@
-import { takeEvery, put } from '@redux-saga/core/effects'
+import { takeLatest, put, call } from '@redux-saga/core/effects'
 
-import { GET_LATEST_CURRENCY } from '../constants';
 import { getLatestCurrency } from '../../services/currencyApi';
-import { setLatestCurrency } from '../actions/actionCreator';
+import { setCurrency } from '../reducers/currency';
 
 export function* workerSaga() {
-    const { result } = yield getLatestCurrency({ fromCurrency: 'USD', toCurrency: 'RUB' });
-    yield put(setLatestCurrency(result));
+    const response = yield call(() => getLatestCurrency({ fromCurrency: 'USD', toCurrency: 'RUB' }));
+    const { result } = response;
+    console.log(result)
+    yield put(setCurrency(result))
 }
 
-export function* watchClickSaga() {
-    yield takeEvery(GET_LATEST_CURRENCY, workerSaga);
+export function* watcherSaga() {
+    yield takeLatest('GET_CURRENCY', workerSaga);
 }
 
 
 export default function* rootSaga() {
-    yield watchClickSaga();
+    yield watcherSaga();
 }

@@ -1,8 +1,8 @@
-import { createStore, compose, applyMiddleware } from "redux";
+import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
 
-import reducer from "./reducers/index";
 import rootSaga from "./sagas";
+import { currencyReducer } from './reducers/currency'
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -13,13 +13,15 @@ const composeEnhancers =
         })
         : compose;
 
-const configureStore = preloadedState => createStore(
-    reducer,
-    preloadedState,
-    composeEnhancers(applyMiddleware(sagaMiddleware)),
-)
+const reducer = combineReducers({
+    currencyReducer,
+})
 
-const store = configureStore({});
+const store = createStore(
+    reducer,
+    {},
+    composeEnhancers(applyMiddleware(sagaMiddleware)),
+);
 
 sagaMiddleware.run(rootSaga);
 

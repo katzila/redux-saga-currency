@@ -1,7 +1,9 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react'
 import { Button } from 'antd';
 
-import { getLatestCurrency } from './app/actions/actionCreator';
+import { getCurrency } from './app/reducers/currency';
+
 import './App.css';
 
 function App() {
@@ -9,14 +11,17 @@ function App() {
 
 
   const handleCurrency = () => {
-    dispatch(getLatestCurrency())
+    dispatch(getCurrency())
   }
 
+  useEffect(handleCurrency, [dispatch])
+
+  const rate = useSelector((state) => state?.currencyReducer?.currency)
 
   return (
     <div className="App">
-      <h1>{`USD to RUB : `}</h1>
-      <Button type='primary' onClick={handleCurrency}>Get currency</Button>
+      <h1>{`USD to RUB : ${rate}`}</h1>
+      <Button type='primary' onClick={handleCurrency}>Get new currency rate</Button>
     </div>
   );
 }
