@@ -8,5 +8,10 @@ const currencyApiHeaders = {
 }
 
 export const getLatestCurrency = async ({ fromCurrency, toCurrency }) => (
-  await fetch(`${BASE_URL}/convert?from=${fromCurrency}&to=${toCurrency}&amount=1`, { headers: currencyApiHeaders }).then((res => res.json())).catch(console.log(`${BASE_URL}/convert?from=${fromCurrency}&to=${toCurrency}&amount=1`))
+  await fetch(`${BASE_URL}/convert?from=${fromCurrency}&to=${toCurrency}&amount=1`, { headers: currencyApiHeaders }).then((res => res.json()))
+)
+
+
+export const getCurrenciesList = async () => (
+  await fetch(`${BASE_URL}/currencies`, { headers: currencyApiHeaders }).then((res => res.json()))
 )
