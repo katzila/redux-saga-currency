@@ -10,20 +10,18 @@ const { Title, Text } = Typography;
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <Layout>
-        <Routes>
-          <Route exact path='/' element={<Currencies />} />
-          <Route exact path='/convertion' element={<Convertion />} />
-        </Routes>
-      </Layout>
-      <div className='footer'>
-        <Title level={5} style={{ color: 'white', textAlign: 'center' }}>
-          Currency converter <br />
-          With useless footer
-        </Title>
+    <div className="app">
+      <div className='navbar'>
+        <Navbar />
       </div>
+      <Layout className='main'>
+        <div className='routes'>
+          <Routes>
+            <Route exact path='/' element={<Currencies />} />
+            <Route exact path='/convertion' element={<Convertion />} />
+          </Routes>
+        </div>
+      </Layout>
     </div>
   );
 }
