@@ -11,7 +11,7 @@ export const setCurrenciesList = (currencies) => ({
 });
 
 const initialState = {
-    currencies: [],
+    currencies: {},
 }
 
 export const currenciesListReducer = (state = initialState, action) => {

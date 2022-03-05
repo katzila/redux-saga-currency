@@ -1,6 +1,7 @@
 import { takeLatest, put, call, all, fork } from '@redux-saga/core/effects'
 
 import { getLatestCurrency, getCurrenciesList } from '../../services/currencyApi';
+import { setCurrenciesList } from '../reducers/currenciesList';
 import { setCurrency } from '../reducers/currency';
 
 export function* workerCurrency() {
@@ -16,7 +17,7 @@ export function* watcherCurrency() {
 export function* workerCurrenciesList() {
     const response = yield call(getCurrenciesList);
     const { result } = response;
-    yield put(setCurrency(result))
+    yield put(setCurrenciesList(result))
 }
 
 export function* watcherCurrenciesList() {
