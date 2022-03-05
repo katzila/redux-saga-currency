@@ -1,17 +1,22 @@
 import React from 'react'
 import { Menu } from 'antd'
+import { Link } from 'react-router-dom'
 
 
 const Navbar = () => {
 
   return (
     <div className='nav-container'>
-      <Menu theme='dark' mode='horizontal'  defaultSelectedKeys={['/']}>
+      <Menu theme='dark' mode='horizontal' defaultSelectedKeys={['/']}>
         <Menu.Item key='/'>
-          Currencies
+          <Link to='/'>
+            Currencies
+          </Link>
         </Menu.Item>
-        <Menu.Item key='/conversion'>
-          Conversion
+        <Menu.Item key='/convertion'>
+          <Link to='/convertion'>
+            Convertion
+          </Link>
         </Menu.Item>
       </Menu>
     </div>
