@@ -1,7 +1,7 @@
 const GET_CURRENCY = 'GET_CURRENCY';
 const SET_CURRENCY = 'SET_CURRENCY';
 
-export const getCurrency = (id) => ({
+export const getCurrency = () => ({
     type: GET_CURRENCY,
 });
 
