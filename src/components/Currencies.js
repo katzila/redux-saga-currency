@@ -1,50 +1,31 @@
 import React, { useEffect, useState } from 'react'
-import { Typography, Button, Row, Select, Space, Col, Table } from 'antd';
+import { Typography, Row, Select, Space, Col, Table } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getCurrenciesList } from '../app/reducers/currenciesList';
-import { getCurrency } from '../app/reducers/currency'
+import { getRates } from '../app/reducers/currenciesRates'
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 const { Option } = Select;
 
 const Currencies = () => {
-    const [currency, setCurrency] = useState('RUB');
-    const [currenciesData, setCurrenciesData] = useState([
-        {
-            key: '1',
-            currency: `USD/${currency}`,
-            rate: '1',
-        },
-        {
-            key: '2',
-            currency: `EUR/${currency}`,
-            rate: '2',
-        },
-    ]);
     const dispatch1 = useDispatch();
     const dispatch2 = useDispatch();
 
-    const handleCurrency = () => {
-        dispatch1(getCurrency())
+    const handleRates = (fromCurrency, toCurrencies) => {
+        dispatch1(getRates(fromCurrency, toCurrencies))
     }
 
     const handleCurrenciesList = () => {
         dispatch2(getCurrenciesList())
     }
 
-    const handleSelectCurrency = (value) => {
-        setCurrency(value);
-        setCurrenciesData(
-            
-        );
-    }
-
-    useEffect(handleCurrency, [dispatch1])
     useEffect(handleCurrenciesList, [dispatch2])
 
-    const rate = useSelector((state) => state?.currencyReducer?.currency)
+    const rates = useSelector((state) => state?.ratesReducer?.rates)
     const currencies = useSelector((state) => state?.currenciesListReducer?.currencies)
+
+    // const [currenciesData, setCurrenciesData] = useState([]);
 
     const columns = [
         {
@@ -59,7 +40,24 @@ const Currencies = () => {
         }
     ]
 
-    if (!currencies || !rate) return (<div>Loading</div>)
+    const handleSelectCurrency = (value) => {
+        const filteredCurrencies = Object.keys(currencies).filter((key) => (
+            key !== value && key !== 'VEF'  //нерабочая валюта
+        ))
+        handleRates(value, filteredCurrencies);
+        // setCurrenciesData(
+        //     filteredCurrencies.map((key, index) => (
+        //         {
+        //             key: index,
+        //             currency: `${key}/${value}`,
+        //             rate: rates[index]
+        //         }
+        //     ))
+        // );
+    }
+
+    if (!currencies) return (<div>Loading</div>)
+
 
     return (
         <>
@@ -73,16 +71,12 @@ const Currencies = () => {
                             placeholder='Select a Currency'
                             onChange={(value) => handleSelectCurrency(value)}
                             filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-
                         >
-                            {Object.keys(currencies)?.map((key) => <Option value={currencies[key]}>{`${currencies[key]}(${key})`}</Option>)}
+                            {Object.keys(currencies)?.map((key) => <Option value={key}>{`${currencies[key]}(${key})`}</Option>)}
                         </Select>
                     </Space>
-                    <Title level={1}>{`USD to RUB : ${rate}`}</Title>
-                    <Title level={2}>{console.log(Object.keys(currencies))}</Title>
-
-                    <Table columns={columns} dataSource={currenciesData} />
-                    <Button type='primary' onClick={handleCurrency}>Get new currency rate</Button>
+                    {/* <Title level={1}>{`USD to RUB : ${rates[0]}`}</Title> */}
+                    <Table columns={columns} dataSource={rates} />
                 </Col>
             </Row>
         </>

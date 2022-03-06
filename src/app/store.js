@@ -2,7 +2,7 @@ import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
 
 import rootSaga from "./sagas";
-import { currencyReducer } from './reducers/currency'
+import { ratesReducer } from './reducers/currenciesRates'
 import { currenciesListReducer } from "./reducers/currenciesList";
 
 const sagaMiddleware = createSagaMiddleware();
@@ -15,7 +15,7 @@ const composeEnhancers =
         : compose;
 
 const reducer = combineReducers({
-    currencyReducer,
+    ratesReducer,
     currenciesListReducer
 })
 

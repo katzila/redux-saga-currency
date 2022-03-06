@@ -1,17 +1,18 @@
 import { takeLatest, put, call, all, fork } from '@redux-saga/core/effects'
 
-import { getLatestCurrency, getCurrenciesList } from '../../services/currencyApi';
+import { getCurrencyRates, getCurrenciesList } from '../../services/currencyApi';
 import { setCurrenciesList } from '../reducers/currenciesList';
-import { setCurrency } from '../reducers/currency';
+import { setRates } from '../reducers/currenciesRates';
 
-export function* workerCurrency() {
-    const response = yield call(() => getLatestCurrency({ fromCurrency: 'USD', toCurrency: 'RUB' }));
+export function* workerRates(action) {
+    const response = yield call(() => getCurrencyRates({ fromCurrency: action.fromCurrency, toCurrencies: action.toCurrencies.join('%2C') }));
+    console.log(response)
     const { result } = response;
-    yield put(setCurrency(result))
+    yield put(setRates(result,action.fromCurrency))
 }
 
-export function* watcherCurrency() {
-    yield takeLatest('GET_CURRENCY', workerCurrency);
+export function* watcherRates() {
+    yield takeLatest('GET_RATES', workerRates);
 }
 
 export function* workerCurrenciesList() {
@@ -26,7 +27,7 @@ export function* watcherCurrenciesList() {
 
 export default function* rootSaga() {
     yield all([
-        fork(watcherCurrency),
+        fork(watcherRates),
         fork(watcherCurrenciesList)
     ])
 
