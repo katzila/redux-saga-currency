@@ -49,25 +49,23 @@ const Currencies = () => {
 
 
     return (
-        <>
-            <Row>
-                <Col offset={7} span={10}>
-                    <Space size='large'>
-                        <Title level={3}>Base currency</Title>
-                        <Select
-                            showSearch
-                            className='select-currencies'
-                            placeholder='Select a Currency'
-                            onChange={(value) => handleSelectCurrency(value)}
-                            filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                        >
-                            {Object.keys(currencies)?.map((key) => <Option value={key}>{`${currencies[key]}(${key})`}</Option>)}
-                        </Select>
-                    </Space>
-                    <Table columns={columns} dataSource={rates} />
-                </Col>
-            </Row>
-        </>
+        <Row justify='center'>
+            <Col>
+                <Space size='large'>
+                    <Title level={3}>Base currency</Title>
+                    <Select
+                        showSearch
+                        className='select-currencies'
+                        placeholder='Select a Currency'
+                        onChange={(value) => handleSelectCurrency(value)}
+                        filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                    >
+                        {Object.keys(currencies)?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
+                    </Select>
+                </Space>
+                <Table columns={columns} dataSource={rates} />
+            </Col>
+        </Row>
     )
 }
 
