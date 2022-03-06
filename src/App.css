@@ -26,7 +26,8 @@
 }
 
 .main {
-  height: 95vh;
+  min-height: 95vh;
+  padding: 20px;
 }
 
 .footer {
