@@ -1,0 +1,17 @@
+import { currencyKey } from "../apiKey";
+
+const BASE_URL = 'https://currency-converter-pro1.p.rapidapi.com'
+
+const currencyApiHeaders = {
+  'x-rapidapi-host': 'currency-converter-pro1.p.rapidapi.com',
+  'x-rapidapi-key': currencyKey
+}
+
+export const getCurrencyRates = async ({ fromCurrency, toCurrencies }) => (
+  await fetch(`${BASE_URL}/latest-rates?base=${fromCurrency}&currencies=${toCurrencies}`, { headers: currencyApiHeaders }).then((res => res.json()))
+)
+
+
+export const getCurrenciesList = async () => (
+  await fetch(`${BASE_URL}/currencies`, { headers: currencyApiHeaders }).then((res => res.json()))
+)
