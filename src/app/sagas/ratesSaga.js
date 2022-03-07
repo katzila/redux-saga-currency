@@ -5,7 +5,6 @@ import { setRates } from '../reducers/currenciesRates';
 
 export function* workerRates(action) {
     const response = yield call(() => getCurrencyRates({ fromCurrency: action.fromCurrency, toCurrencies: action.toCurrencies.join('%2C') }));
-    console.log(response)
     const { result } = response;
     yield put(setRates(result, action.fromCurrency))
 }
