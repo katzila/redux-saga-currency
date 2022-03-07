@@ -16,6 +16,7 @@ export const getCurrenciesList = async () => (
   await fetch(`${BASE_URL}/currencies`, { headers: currencyApiHeaders }).then((res => res.json()))
 )
 
-export const getConvertion = async ({ fromCurrency, toCurrency, amount }) => (
-  await fetch(`${BASE_URL}/convert?from=${fromCurrency}&to=${toCurrency}&amount=${amount}`, { headers: currencyApiHeaders }).then((res => res.json()))
-)
+export const getConvertion = async ({ fromCurrency, toCurrency, amount }) => {
+  if (fromCurrency === toCurrency) return { result: amount }
+  return await fetch(`${BASE_URL}/convert?from=${fromCurrency}&to=${toCurrency}&amount=${amount}`, { headers: currencyApiHeaders }).then((res => res.json()))
+}
