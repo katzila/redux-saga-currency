@@ -1,12 +1,10 @@
-import { Routes, Route, Link } from 'react-router-dom'
-import { Layout, Typography } from 'antd';
+import { Routes, Route } from 'react-router-dom'
+import { Layout } from 'antd';
 
 import Navbar from './components/Navbar';
 import { Currencies, Convertion } from './components';
 
 import './App.css';
-
-const { Title, Text } = Typography;
 
 function App() {
   return (
