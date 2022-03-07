@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Typography, Row, Select, Space, Col, Table } from 'antd';
+import { Typography, Row, Select, Col, Table } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getCurrenciesList } from '../app/reducers/currenciesList';
@@ -63,7 +63,7 @@ const Currencies = () => {
                             onChange={(value) => handleSelectCurrency(value)}
                             filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                         >
-                            {Object.keys(currencies)?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
+                            {Object.keys(currencies)?.filter((key) => key !== 'VEF')?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
                         </Select>
                     </Col>
                     <Col span={24}>

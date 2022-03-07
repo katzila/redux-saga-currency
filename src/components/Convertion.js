@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Typography, Row, Col, Space, Select, Input, Button } from 'antd';
+import { Typography, Row, Col, Select, Input, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getCurrenciesList } from '../app/reducers/currenciesList';
 import { getConvert } from '../app/reducers/currencyConvert';
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 const { Option } = Select;
 
 const Convertion = () => {
@@ -50,7 +50,7 @@ const Convertion = () => {
                         filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                         size='large'
                     >
-                        {Object.keys(currencies)?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
+                        {Object.keys(currencies)?.filter((key) => key !== 'VEF')?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
                     </Select>
                 </Col>
                 <Col lg={8} xs={24} className='last-col'>
@@ -65,7 +65,7 @@ const Convertion = () => {
                                 filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                                 size='large'
                             >
-                                {Object.keys(currencies)?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
+                                {Object.keys(currencies)?.filter((key) => key !== 'VEF')?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
                             </Select>
                         </Col>
                         <Col>
