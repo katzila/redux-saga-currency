@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <div className='nav-container'>
-      <Menu theme='dark' mode='horizontal' defaultSelectedKeys={['/']} selectedKeys={[location.pathname]}>
+      <Menu theme='dark' mode='horizontal' defaultSelectedKeys={['/']} selectedKeys={[location.pathname]} disabledOverflow='true'>
         <Menu.Item key='/'>
           <Link to='/'>
             Currencies

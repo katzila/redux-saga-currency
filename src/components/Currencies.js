@@ -50,20 +50,26 @@ const Currencies = () => {
 
     return (
         <Row justify='center'>
-            <Col>
-                <Space size='large'>
-                    <Title level={3}>Base currency</Title>
-                    <Select
-                        showSearch
-                        className='select-currencies'
-                        placeholder='Select a Currency'
-                        onChange={(value) => handleSelectCurrency(value)}
-                        filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                    >
-                        {Object.keys(currencies)?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
-                    </Select>
-                </Space>
-                <Table columns={columns} dataSource={rates} />
+            <Col xs={24} sm={16} md={14} lg={12} xl={10} xxl={8}>
+                <Row gutter={[16, 12]} >
+                    <Col lg={9} xs={24}>
+                        <Title level={3}>Base currency</Title>
+                    </Col>
+                    <Col lg={15} xs={24}>
+                        <Select
+                            showSearch
+                            className='select-currencies'
+                            placeholder='Select a Currency'
+                            onChange={(value) => handleSelectCurrency(value)}
+                            filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                        >
+                            {Object.keys(currencies)?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
+                        </Select>
+                    </Col>
+                    <Col span={24}>
+                        <Table columns={columns} dataSource={rates} />
+                    </Col>
+                </Row>
             </Col>
         </Row>
     )

@@ -35,26 +35,27 @@ const Convertion = () => {
 
     return (
         <Row justify='center'>
-            <Col>
-                <Row style={{ marginBottom: 8 }}>
-                    <Space size='large'>
-                        <Col>
-                            <Title level={5}>Amount</Title>
-                            <Input placeholder='number' onChange={handleChangeAmount}></Input>
-                        </Col>
-                        <Col>
-                            <Title level={5}>From</Title>
-                            <Select
-                                showSearch
-                                className='select-currencies'
-                                placeholder='Select a Currency'
-                                onChange={(currency) => setFromCurrency(currency)}
-                                filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                            >
-                                {Object.keys(currencies)?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
-                            </Select>
-                        </Col>
-                        <Col>
+            <Row gutter={[16, 24]} justify='top'>
+                <Col lg={8} xs={24}>
+                    <Title level={5}>Amount</Title>
+                    <Input placeholder='number' onChange={handleChangeAmount} size='large'></Input>
+                </Col>
+                <Col lg={8} xs={24}>
+                    <Title level={5}>From</Title>
+                    <Select
+                        showSearch
+                        className='select-currencies'
+                        placeholder='Select a Currency'
+                        onChange={(currency) => setFromCurrency(currency)}
+                        filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                        size='large'
+                    >
+                        {Object.keys(currencies)?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
+                    </Select>
+                </Col>
+                <Col lg={8} xs={24} className='last-col'>
+                    <Row gutter={[0, 16]} justify='end'>
+                        <Col span={24}>
                             <Title level={5}>To</Title>
                             <Select
                                 showSearch
@@ -62,17 +63,20 @@ const Convertion = () => {
                                 placeholder='Select a Currency'
                                 onChange={(currency) => setToCurrency(currency)}
                                 filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                                size='large'
                             >
                                 {Object.keys(currencies)?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
                             </Select>
                         </Col>
-                    </Space>
-                </Row>
-                <Row justify='end'>
-                    <Button type='primary' onClick={handleClickConvert}>Convert</Button>
-                </Row>
-                <Text>{`${convert?.amount || ''} ${convert?.fromCurrency || ''} = ${convert?.result || ''} ${convert?.toCurrency || ''}`}</Text>
-            </Col>
+                        <Col>
+                            <Button type='primary' onClick={handleClickConvert} size='large'>Convert</Button>
+                        </Col>
+                    </Row>
+                </Col>
+                <Col span={24}>
+                    <Title level={3} code>{`${convert?.amount || ''} ${convert?.fromCurrency || ''} = ${convert?.result || ''} ${convert?.toCurrency || ''}`}</Title>
+                </Col>
+            </Row>
         </Row>
     )
 }
