@@ -19,7 +19,6 @@ export const convertReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_CONVERT:
             const { convert } = action;
-            console.log(action)
             return {
                 ...state,
                 convert

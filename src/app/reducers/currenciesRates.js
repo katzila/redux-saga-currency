@@ -21,7 +21,6 @@ export const ratesReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_RATES:
             const { rates } = action;
-            console.log(action)
             return {
                 ...state,
                 rates: Object.values(rates).map((rate, index) => (
