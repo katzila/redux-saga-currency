@@ -53,7 +53,7 @@ const Convertion = () => {
                         {Object.keys(currencies)?.filter((key) => key !== 'VEF')?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
                     </Select>
                 </Col>
-                <Col lg={8} xs={24} className='last-col'>
+                <Col lg={8} xs={24}>
                     <Row gutter={[0, 16]} justify='end'>
                         <Col span={24}>
                             <Title level={5}>To</Title>
