@@ -1,10 +1,9 @@
-import { currencyKey } from "../apiKey";
 
 const BASE_URL = 'https://currency-converter-pro1.p.rapidapi.com'
 
 const currencyApiHeaders = {
   'x-rapidapi-host': 'currency-converter-pro1.p.rapidapi.com',
-  'x-rapidapi-key': currencyKey
+  'x-rapidapi-key': process.env.REACT_APP_CURRENCY_KEY
 }
 
 export const getCurrencyRates = async ({ fromCurrency, toCurrencies }) => (
