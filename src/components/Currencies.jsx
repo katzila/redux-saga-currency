@@ -52,10 +52,10 @@ const Currencies = () => {
         <Row justify='center'>
             <Col xs={24} sm={16} md={14} lg={12} xl={10} xxl={8}>
                 <Row gutter={[16, 12]} >
-                    <Col lg={9} xs={24}>
+                    <Col lg={9} xs={24} className='flex-col'>
                         <Title level={3}>Base currency</Title>
                     </Col>
-                    <Col lg={15} xs={24}>
+                    <Col lg={15} xs={24} className='flex-col'>
                         <Select
                             showSearch
                             className='select-currencies'

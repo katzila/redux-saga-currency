@@ -36,11 +36,11 @@ const Convertion = () => {
     return (
         <Row justify='center'>
             <Row gutter={[16, 24]} justify='top'>
-                <Col lg={8} xs={24}>
+                <Col lg={8} xs={24} className='flex-col'>
                     <Title level={5}>Amount</Title>
                     <Input placeholder='number' onChange={handleChangeAmount} size='large'></Input>
                 </Col>
-                <Col lg={8} xs={24}>
+                <Col lg={8} xs={24} className='flex-col'>
                     <Title level={5}>From</Title>
                     <Select
                         showSearch
@@ -53,9 +53,9 @@ const Convertion = () => {
                         {Object.keys(currencies)?.filter((key) => key !== 'VEF')?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
                     </Select>
                 </Col>
-                <Col lg={8} xs={24}>
+                <Col lg={8} xs={24} className='flex-col'>
                     <Row gutter={[0, 16]} justify='end'>
-                        <Col span={24}>
+                        <Col span={24} className='flex-col'>
                             <Title level={5}>To</Title>
                             <Select
                                 showSearch
@@ -68,12 +68,12 @@ const Convertion = () => {
                                 {Object.keys(currencies)?.filter((key) => key !== 'VEF')?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
                             </Select>
                         </Col>
-                        <Col>
+                        <Col className='flex-col'>
                             <Button type='primary' onClick={handleClickConvert} size='large'>Convert</Button>
                         </Col>
                     </Row>
                 </Col>
-                <Col span={24}>
+                <Col span={24} className='flex-col'>
                     <Title level={3} code>{`${convert?.amount || ''} ${convert?.fromCurrency || ''} = ${convert?.result || ''} ${convert?.toCurrency || ''}`}</Title>
                 </Col>
             </Row>

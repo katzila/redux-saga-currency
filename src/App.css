@@ -38,7 +38,7 @@
   align-items: center;
 }
 
-.ant-col{
+.flex-col{
   display: flex;
   flex-direction: column;
   justify-content: center;
