@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import { Layout } from 'antd';
 
 import Navbar from './components/Navbar';
-import { Currencies, Convertion } from './components';
+import { Currencies, Convertion, Login } from './components';
 
 import './App.css';
 
@@ -15,7 +15,8 @@ function App() {
       <Layout className='main'>
         <div className='routes'>
           <Routes>
-            <Route exact path='/' element={<Currencies />} />
+            <Route exact path='/' element={<Login />} />
+            <Route exact path='/currencies' element={<Currencies />} />
             <Route exact path='/convertion' element={<Convertion />} />
           </Routes>
         </div>
