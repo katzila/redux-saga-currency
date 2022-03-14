@@ -5,6 +5,7 @@ import rootSaga from "./sagas";
 import { ratesReducer } from './reducers/currenciesRates'
 import { currenciesListReducer } from "./reducers/currenciesList";
 import { convertReducer } from "./reducers/currencyConvert";
+import { usersReducer } from "./reducers/users";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -18,7 +19,8 @@ const composeEnhancers =
 const reducer = combineReducers({
     ratesReducer,
     currenciesListReducer,
-    convertReducer
+    convertReducer,
+    usersReducer,
 })
 
 const store = createStore(

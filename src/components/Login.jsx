@@ -1,22 +1,44 @@
-import React from 'react'
-import { Row, Col, Input, Typography, Button, Form, Checkbox } from 'antd'
+import React, { useState } from 'react'
+import { Row, Col, Input, Typography, Button, Form, Alert } from 'antd'
+import { useDispatch, useSelector } from 'react-redux';
+import { setUsers } from '../app/reducers/users';
+
 
 const { Title } = Typography;
 const { Password } = Input;
 
 const Login = () => {
+    const [notice, setNotice] = useState({ message: '', type: 'success', showNotice: false })
+
+    const users = useSelector((state) => state?.usersReducer?.users);
+
     const onFinish = (values) => {
         console.log('Success:', values);
+        if (users.some(user => user.username === values.username && user.password === values.password)) {
+            setNotice({
+                message: `Welcome ${values.username}`,
+                type: 'success',
+                showNotice: true
+            })
+        } else {
+            setNotice({
+                message: `Invalid Username+Password combination`,
+                type: 'error',
+                showNotice: true
+            })
+        }
     };
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+
+
     return (
         <Row justify='center'>
-            <Col xs={24} sm={16} md={14} lg={10} xl={8} xxl={6}>
+            <Col xs={24} md={14} lg={10} xl={8} xxl={6}>
                 <Form
-                    name="basic"
+                    name="login"
                     labelCol={{
                         span: 6,
                     }}
@@ -31,6 +53,27 @@ const Login = () => {
                     autoComplete="off"
                 >
                     <Form.Item
+                        wrapperCol={{
+                            offset: 6,
+                            span: 6,
+                        }}
+                    >
+                        <Title level={1}>Login</Title>
+                    </Form.Item>
+                    {notice.showNotice && <Form.Item
+                        wrapperCol={{
+                            offset: 0,
+                            span: 24,
+                        }}
+                    >
+                        <Row justify='center'>
+                            <Alert
+                                message={notice.message}
+                                type={notice.type}
+                            />
+                        </Row>
+                    </Form.Item>}
+                    <Form.Item
                         label="Username"
                         name="username"
                         rules={[
@@ -40,7 +83,7 @@ const Login = () => {
                             },
                         ]}
                     >
-                        <Input size='large'/>
+                        <Input size='large' />
                     </Form.Item>
 
                     <Form.Item
@@ -55,22 +98,10 @@ const Login = () => {
                     >
                         <Password size='large' />
                     </Form.Item>
-
-                    <Form.Item
-                        name="remember"
-                        valuePropName="checked"
-                        wrapperCol={{
-                            offset: 8,
-                            span: 16,
-                        }}
-                    >
-                        <Checkbox>Remember me</Checkbox>
-                    </Form.Item>
-
                     <Form.Item
                         wrapperCol={{
-                            offset: 8,
-                            span: 16,
+                            offset: 6,
+                            span: 5,
                         }}
                     >
                         <Button type="primary" htmlType="submit" size='large'>
