@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <div className='nav-container'>
-      <Menu theme='dark' mode='horizontal' defaultSelectedKeys={['/']} selectedKeys={[location.pathname]} disabledOverflow='true'>
+      <Menu theme='dark' mode='horizontal' defaultSelectedKeys={['/']} selectedKeys={[location.pathname]} disabledOverflow>
         <Menu.Item key='/' icon={<LoginOutlined />}>
           <Link to='/'>
             Login
