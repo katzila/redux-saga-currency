@@ -68,7 +68,7 @@ const Convertion = () => {
                                 {Object.keys(currencies)?.filter((key) => key !== 'VEF')?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
                             </Select>
                         </Col>
-                        <Col className='flex-col'>
+                        <Col className='flex-col' span={24}>
                             <Button type='primary' onClick={handleClickConvert} size='large'>Convert</Button>
                         </Col>
                     </Row>
