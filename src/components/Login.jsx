@@ -1,32 +1,35 @@
 import React, { useState } from 'react'
 import { Row, Col, Input, Typography, Button, Form, Alert } from 'antd'
 import { useDispatch, useSelector } from 'react-redux';
-import { setUsers } from '../app/reducers/users';
+import { useNavigate } from "react-router-dom";
+
+import { setCurrentUser } from '../app/reducers/currentUser';
 
 
 const { Title } = Typography;
 const { Password } = Input;
 
 const Login = () => {
-    const [notice, setNotice] = useState({ message: '', type: 'success', showNotice: false })
+    const [notice, setNotice] = useState({ message: '', showNotice: false })
 
     const users = useSelector((state) => state?.usersReducer?.users);
+    const dispatchCurrentUser = useDispatch();
+    let navigate = useNavigate();
 
     const onFinish = (values) => {
+
         console.log('Success:', values);
         if (users.some(user => user.username === values.username && user.password === values.password)) {
-            setNotice({
-                message: `Welcome ${values.username}`,
-                type: 'success',
-                showNotice: true
-            })
+            dispatchCurrentUser(setCurrentUser(values.username))
+            navigate('/user')
+
         } else {
             setNotice({
                 message: `Invalid Username+Password combination`,
-                type: 'error',
-                showNotice: true
+                showNotice: true,
             })
         }
+
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -69,7 +72,7 @@ const Login = () => {
                         <Row justify='center'>
                             <Alert
                                 message={notice.message}
-                                type={notice.type}
+                                type={'error'}
                             />
                         </Row>
                     </Form.Item>}

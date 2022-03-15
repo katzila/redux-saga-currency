@@ -2,25 +2,27 @@ import React from 'react'
 import { Menu } from 'antd'
 import { Link, useLocation } from 'react-router-dom'
 import { DollarOutlined, FundOutlined, LoginOutlined, UserOutlined } from '@ant-design/icons/lib/icons';
+import { useSelector } from 'react-redux';
 
 
 const Navbar = () => {
 
-  let location = useLocation()
+  let location = useLocation();
+  const currentUser = useSelector((state) => state?.currentUserReducer?.username);
 
   return (
     <div className='nav-container'>
       <Menu theme='dark' mode='horizontal' defaultSelectedKeys={['/']} selectedKeys={[location.pathname]} disabledOverflow>
-        <Menu.Item key='/' icon={<LoginOutlined />}>
+        {(currentUser === '') && <Menu.Item key='/' icon={<LoginOutlined />}>
           <Link to='/'>
             Login
           </Link>
-        </Menu.Item>
-        <Menu.Item key='/user' icon={<UserOutlined />}>
+        </Menu.Item>}
+        {!(currentUser === '') && <Menu.Item key='/user' icon={<UserOutlined />}>
           <Link to='/user'>
             User
           </Link>
-        </Menu.Item>
+        </Menu.Item>}
         <Menu.Item key='/currencies' icon={<FundOutlined />}>
           <Link to='/currencies'>
             Currencies

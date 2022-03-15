@@ -2,9 +2,9 @@ const SET_CURRENT_USER = 'SET_CURRENT_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
 
 
-export const setCurrentUser = (user) => ({
+export const setCurrentUser = (username) => ({
     type: SET_CURRENT_USER,
-    username: user.username,
+    username,
 });
 
 export const logoutUser = () => ({
