@@ -7,27 +7,29 @@ export const getRates = (fromCurrency, toCurrencies) => ({
     toCurrencies
 });
 
-export const setRates = (rates, cur) => ({
+export const setRates = (rates, baseCurrency) => ({
     type: SET_RATES,
     rates,
-    cur
+    baseCurrency
 });
 
 const initialState = {
-    currency: undefined,
+    baseCurrency: [],
+    rates: [],
 }
 
 export const ratesReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_RATES:
-            const { rates } = action;
+            const { rates, baseCurrency } = action;
             return {
                 ...state,
+                baseCurrency,
                 rates: Object.values(rates).map((rate, index) => (
                     {
                         key: index,
                         currency: `${Object.keys(rates)[index]}/${action.cur}`,
-                        rate: 1/rate
+                        rate: 1 / rate
                     })
                 )
             }
