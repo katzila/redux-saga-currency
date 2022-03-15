@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { getRates } from '../app/reducers/currenciesRates';
 import { getCurrenciesList } from '../app/reducers/currenciesList';
-import { logoutUser } from '../app/reducers/currentUser';
+import { logoutUser, setUserCurrency } from '../app/reducers/currentUser';
 
 
 const { Title } = Typography;
@@ -29,9 +29,10 @@ const User = () => {
 
     const currencies = useSelector((state) => state?.currenciesListReducer?.currencies);
     const currentUser = useSelector((state) => state?.currentUserReducer?.username)
-    const baseCurrency = useSelector((state) => state?.ratesReducer?.baseCurrency)
+    const baseCurrency = useSelector((state) => state?.currentUserReducer?.baseCurrency)
 
     const handleSelectCurrency = (value) => {
+        dispatchCurrentUser(setUserCurrency(value));
         const filteredCurrencies = Object.keys(currencies).filter((key) => (
             key !== value && key !== 'VEF'  //нерабочая валюта
         ))
