@@ -1,6 +1,6 @@
 const SET_CURRENT_USER = 'SET_CURRENT_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
-const SET_USER_CURRENCY = 'SET_USER_CURRENCY'
+const SET_USER_CURRENCY = 'SET_USER_CURRENCY';
 
 export const setCurrentUser = (username) => ({
     type: SET_CURRENT_USER,
