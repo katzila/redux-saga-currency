@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react'
 import { Row, Col, Typography, Select, Button } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 
 import { getRates } from '../app/reducers/currenciesRates';
 import { getCurrenciesList } from '../app/reducers/currenciesList';
+import { logoutUser } from '../app/reducers/currentUser';
+
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -11,6 +14,8 @@ const { Option } = Select;
 const User = () => {
     const dispatchRates = useDispatch();
     const dispatchList = useDispatch();
+    const dispatchCurrentUser = useDispatch();
+    const navigate = useNavigate();
 
     const handleRates = (fromCurrency, toCurrencies) => {
         dispatchRates(getRates(fromCurrency, toCurrencies))
@@ -33,6 +38,11 @@ const User = () => {
         handleRates(value, filteredCurrencies);
     }
 
+    const handleClickLogout = () => {
+        dispatchCurrentUser(logoutUser());
+        navigate('/');
+    }
+
     if (!currencies) return (<div>Loading</div>)
 
     return (
@@ -52,13 +62,13 @@ const User = () => {
                             placeholder='Select a Currency'
                             onChange={(value) => handleSelectCurrency(value)}
                             filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                            defaultValue={baseCurrency}
+                            defaultValue={baseCurrency || []}
                         >
                             {Object.keys(currencies)?.filter((key) => key !== 'VEF')?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
                         </Select>
                     </Col>
                     <Col span={24} className='flex-col'>
-                        <Button type='primary' size='large'>Logout</Button>
+                        <Button type='primary' size='large' onClick={handleClickLogout}>Logout</Button>
                     </Col>
                 </Row>
             </Col>
