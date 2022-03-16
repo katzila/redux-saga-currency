@@ -15,7 +15,7 @@ export const ratesReducer = (state = initialState, action) => {
                 rates: Object.values(rates).map((rate, index) => (
                     {
                         key: index,
-                        currency: `${Object.keys(rates)[index]}/${action.cur}`,
+                        currency: `${Object.keys(rates)[index]}/${baseCurrency}`,
                         rate: 1 / rate
                     })
                 )

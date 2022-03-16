@@ -5,14 +5,11 @@ const initialState = {
     baseCurrency: [],
 }
 
-export const currentUserReducer = (state = initialState, action) => {
-    switch (action.type) {
+export const currentUserReducer = (state = initialState, { type, baseCurrency, username }) => {
+    switch (type) {
         case SET_CURRENT_USER:
-            const { username } = action;
-            return { ...state, username }
+            return { ...state, username, baseCurrency }
         case SET_USER_CURRENCY:
-            console.log(action);
-            const { baseCurrency } = action;
             return { ...state, baseCurrency }
         case LOGOUT_USER:
             return { ...state, username: '', baseCurrency: [] }

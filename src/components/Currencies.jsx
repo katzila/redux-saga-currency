@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getCurrenciesList } from '../app/actions/currenciesListActions';
 import { getRates } from '../app/actions/ratesActions';
+import { setUserCurrency } from '../app/actions/userActions';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -11,6 +12,7 @@ const { Option } = Select;
 const Currencies = () => {
     const dispatchRates = useDispatch();
     const dispatchList = useDispatch();
+    const dispatchCurrentUser = useDispatch();
 
     const handleRates = (fromCurrency, toCurrencies) => {
         dispatchRates(getRates(fromCurrency, toCurrencies))
@@ -38,12 +40,17 @@ const Currencies = () => {
         }
     ]
 
+    const currentUser = useSelector((state) => state?.currentUserReducer?.username);
+    const baseCurrency = useSelector((state) => state?.currentUserReducer?.baseCurrency);
+
     const handleSelectCurrency = (value) => {
+        dispatchCurrentUser(setUserCurrency(value, currentUser));
         const filteredCurrencies = Object.keys(currencies).filter((key) => (
             key !== value && key !== 'VEF'  //нерабочая валюта
         ))
         handleRates(value, filteredCurrencies);
     }
+
 
     if (!currencies) return (<div>Loading</div>)
 
@@ -60,8 +67,9 @@ const Currencies = () => {
                             showSearch
                             className='select-currencies'
                             placeholder='Select a Currency'
-                            onChange={(value) => handleSelectCurrency(value)}
+                            onSelect={(value) => handleSelectCurrency(value)}
                             filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                            value={baseCurrency || []}
                         >
                             {Object.keys(currencies)?.filter((key) => key !== 'VEF')?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
                         </Select>

@@ -16,12 +16,12 @@ const Login = () => {
     const dispatchCurrentUser = useDispatch();
     let navigate = useNavigate();
 
-    const onFinish = (values) => {
-
-        console.log('Success:', values);
-        if (users.some(user => user.username === values.username && user.password === values.password)) {
-            dispatchCurrentUser(setCurrentUser(values.username))
-            navigate('/user')
+    const onFinish = ({ username, password }) => {
+        const user = users.find(user => user.username === username && user.password === password)
+        console.log('Success:', username, password);
+        if (user !== undefined) {
+            dispatchCurrentUser(setCurrentUser(username, user.baseCurrency));
+            navigate('/user');
 
         } else {
             setNotice({

@@ -6,9 +6,10 @@ export const setUserCurrency = (baseCurrency, username) => ({
     username,
 })
 
-export const setCurrentUser = (username) => ({
+export const setCurrentUser = (username, baseCurrency) => ({
     type: SET_CURRENT_USER,
     username,
+    baseCurrency,
 });
 
 export const logoutUser = () => ({

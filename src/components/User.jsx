@@ -25,11 +25,18 @@ const User = () => {
         dispatchList(getCurrenciesList())
     }
 
-    useEffect(handleCurrenciesList, [dispatchList])
+    const checkAuth = () => {
+        if (currentUser === '')
+            navigate('/');
+    }
+
+    useEffect(handleCurrenciesList, [dispatchList]);
 
     const currencies = useSelector((state) => state?.currenciesListReducer?.currencies);
     const currentUser = useSelector((state) => state?.currentUserReducer?.username)
     const baseCurrency = useSelector((state) => state?.currentUserReducer?.baseCurrency)
+
+    useEffect(checkAuth, [currentUser, navigate])
 
     const handleSelectCurrency = (value) => {
         dispatchCurrentUser(setUserCurrency(value, currentUser));
@@ -61,9 +68,9 @@ const User = () => {
                             showSearch
                             className='select-currencies'
                             placeholder='Select a Currency'
-                            onChange={(value) => handleSelectCurrency(value)}
+                            onSelect={(value) => handleSelectCurrency(value)}
                             filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                            defaultValue={baseCurrency || []}
+                            value={baseCurrency || []}
                         >
                             {Object.keys(currencies)?.filter((key) => key !== 'VEF')?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
                         </Select>
