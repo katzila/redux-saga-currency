@@ -1,7 +1,7 @@
 import { SET_CONVERT } from "../constants";
 
 const initialState = {
-    currency: undefined,
+    convert: {},
 }
 
 export const convertReducer = (state = initialState, action) => {

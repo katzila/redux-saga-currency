@@ -73,9 +73,9 @@ const Convertion = () => {
                         </Col>
                     </Row>
                 </Col>
-                <Col span={24} className='flex-col'>
+                {('result' in convert) && !(convert?.result === '') && <Col span={24} className='flex-col'>
                     <Title level={3} code>{`${convert?.amount || ''} ${convert?.fromCurrency || ''} = ${convert?.result || ''} ${convert?.toCurrency || ''}`}</Title>
-                </Col>
+                </Col>}
             </Row>
         </Row>
     )
