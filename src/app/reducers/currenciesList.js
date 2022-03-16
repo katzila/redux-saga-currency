@@ -1,14 +1,4 @@
-const GET_CURRENCIES_LIST = 'GET_CURRENCIES_LIST';
-const SET_CURRENCIES_LIST = 'SET_CURRENCIES_LIST';
-
-export const getCurrenciesList = () => ({
-    type: GET_CURRENCIES_LIST,
-});
-
-export const setCurrenciesList = (currencies) => ({
-    type: SET_CURRENCIES_LIST,
-    currencies
-});
+import { SET_CURRENCIES_LIST } from "../constants";
 
 const initialState = {
     currencies: {},

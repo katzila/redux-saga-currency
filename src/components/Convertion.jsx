@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Typography, Row, Col, Select, Input, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getCurrenciesList } from '../app/reducers/currenciesList';
-import { getConvert } from '../app/reducers/currencyConvert';
+import { getCurrenciesList } from '../app/actions/currenciesListActions';
+import { getConvert } from '../app/actions/convertActions';
 
 const { Title } = Typography;
 const { Option } = Select;

@@ -1,7 +1,8 @@
 import { takeLatest, put, call } from '@redux-saga/core/effects'
 
 import { getCurrencyRates } from '../../services/currencyApi';
-import { setRates } from '../reducers/currenciesRates';
+import { setRates } from '../actions/ratesActions';
+import { GET_RATES } from '../constants';
 
 export function* workerRates(action) {
     const response = yield call(() => getCurrencyRates({ fromCurrency: action.fromCurrency, toCurrencies: action.toCurrencies.join('%2C') }));
@@ -10,5 +11,5 @@ export function* workerRates(action) {
 }
 
 export function* watcherRates() {
-    yield takeLatest('GET_RATES', workerRates);
+    yield takeLatest(GET_RATES, workerRates);
 }

@@ -3,7 +3,7 @@ import { Row, Col, Input, Typography, Button, Form, Alert } from 'antd'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
-import { setCurrentUser } from '../app/reducers/currentUser';
+import { setCurrentUser } from '../app/actions/userActions';
 
 
 const { Title } = Typography;

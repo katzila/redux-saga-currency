@@ -3,9 +3,9 @@ import { Row, Col, Typography, Select, Button } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 
-import { getRates } from '../app/reducers/currenciesRates';
-import { getCurrenciesList } from '../app/reducers/currenciesList';
-import { logoutUser, setUserCurrency } from '../app/reducers/currentUser';
+import { getRates } from '../app/actions/ratesActions';
+import { getCurrenciesList } from '../app/actions/currenciesListActions';
+import { logoutUser, setUserCurrency } from '../app/actions/userActions';
 
 
 const { Title } = Typography;
@@ -32,7 +32,7 @@ const User = () => {
     const baseCurrency = useSelector((state) => state?.currentUserReducer?.baseCurrency)
 
     const handleSelectCurrency = (value) => {
-        dispatchCurrentUser(setUserCurrency(value));
+        dispatchCurrentUser(setUserCurrency(value, currentUser));
         const filteredCurrencies = Object.keys(currencies).filter((key) => (
             key !== value && key !== 'VEF'  //нерабочая валюта
         ))

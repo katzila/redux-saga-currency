@@ -1,7 +1,8 @@
 import { takeLatest, put, call } from '@redux-saga/core/effects'
 
 import { getConvertion } from '../../services/currencyApi';
-import { setConvert } from '../reducers/currencyConvert';
+import { setConvert } from '../actions/convertActions';
+import { GET_CONVERT } from '../constants';
 
 export function* workerConvert({ convert }) {
     const response = yield call(() => getConvertion(convert));
@@ -10,5 +11,5 @@ export function* workerConvert({ convert }) {
 }
 
 export function* watcherConvert() {
-    yield takeLatest('GET_CONVERT', workerConvert);
+    yield takeLatest(GET_CONVERT, workerConvert);
 }

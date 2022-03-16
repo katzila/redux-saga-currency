@@ -1,17 +1,4 @@
-const GET_RATES = 'GET_RATES';
-const SET_RATES = 'SET_RATES';
-
-export const getRates = (fromCurrency, toCurrencies) => ({
-    type: GET_RATES,
-    fromCurrency,
-    toCurrencies
-});
-
-export const setRates = (rates, baseCurrency) => ({
-    type: SET_RATES,
-    rates,
-    baseCurrency
-});
+import { SET_RATES } from "../constants";
 
 const initialState = {
     baseCurrency: [],

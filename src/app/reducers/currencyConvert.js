@@ -1,15 +1,4 @@
-const GET_CONVERT = 'GET_CONVERT';
-const SET_CONVERT = 'SET_CONVERT';
-
-export const getConvert = (convert) => ({
-    type: GET_CONVERT,
-    convert
-});
-
-export const setConvert = (convert) => ({
-    type: SET_CONVERT,
-    convert
-});
+import { SET_CONVERT } from "../constants";
 
 const initialState = {
     currency: undefined,

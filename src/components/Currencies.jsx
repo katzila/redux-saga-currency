@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { Typography, Row, Select, Col, Table } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getCurrenciesList } from '../app/reducers/currenciesList';
-import { getRates } from '../app/reducers/currenciesRates'
+import { getCurrenciesList } from '../app/actions/currenciesListActions';
+import { getRates } from '../app/actions/ratesActions';
 
 const { Title } = Typography;
 const { Option } = Select;
