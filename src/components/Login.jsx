@@ -103,13 +103,15 @@ const Login = () => {
                     </Form.Item>
                     <Form.Item
                         wrapperCol={{
-                            offset: 6,
-                            span: 5,
+                            sm: { span: 5, offset: 6 },
+                            xs: { span: 24, offset: 0 }
                         }}
                     >
-                        <Button type="primary" htmlType="submit" size='large'>
-                            Submit
-                        </Button>
+                        <Col span={24} className='flex-col'>
+                            <Button type="primary" htmlType="submit" size='large'>
+                                Submit
+                            </Button>
+                        </Col>
                     </Form.Item>
                 </Form>
             </Col>

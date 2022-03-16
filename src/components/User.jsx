@@ -55,8 +55,8 @@ const User = () => {
 
     return (
         <Row justify='center'>
-            <Col xs={24} sm={16} md={14} lg={12} xl={10} xxl={8}>
-                <Row gutter={[16, 12]} >
+            <Col xs={24} sm={15} md={13} lg={13} xl={11} xxl={9}>
+                <Row gutter={[16, 12]} justify='center'>
                     <Col xs={24}>
                         <Title level={1}>Hello {currentUser}!</Title>
                     </Col>
@@ -75,7 +75,7 @@ const User = () => {
                             {Object.keys(currencies)?.filter((key) => key !== 'VEF')?.map((key, index) => <Option key={index} value={key}>{`${currencies[key]}(${key})`}</Option>)}
                         </Select>
                     </Col>
-                    <Col span={24} className='flex-col'>
+                    <Col xs={24} lg={16} xxl={12} className='flex-col'>
                         <Button type='primary' size='large' onClick={handleClickLogout}>Logout</Button>
                     </Col>
                 </Row>
